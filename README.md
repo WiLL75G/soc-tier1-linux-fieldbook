@@ -1,25 +1,37 @@
 # 🛡️ SOC Tier 1 Linux Fieldbook
 
-> A working reference for SOC Tier 1 Analysts who investigate, hunt, and defend on Linux systems.  
-> Three companion documents: **commands**, **filesystem**, and **daily investigation workflow**.
+> A complete beginner-to-intermediate working reference for SOC Tier 1 Analysts. Linux commands, filesystem paths, daily workflows, Splunk queries, Windows commands, MITRE ATT&CK mapping, and incident report templates — everything you'd reach for in a real shift.
 
 ---
 
 ## 📚 What's Inside
 
+### Core Linux References
 | Document | Purpose | Use When |
 |---|---|---|
-| [**COMMANDS.md**](./COMMANDS.md) | Comprehensive command reference. 70+ commands grouped by operational domain (system, network, processes, logs, persistence, etc.) | You need to look up syntax, flags, or example output. |
-| [**FILESYSTEM.md**](./FILESYSTEM.md) | Linux filesystem walkthrough from a SOC analyst's perspective. Where evidence lives, where attackers hide. | You need to understand *why* a path matters and what to monitor there. |
-| [**DAILY-COMMANDS.md**](./DAILY-COMMANDS.md) | The 80/20 daily-driver subset, organized by investigation workflow. | You're learning the *flow* of an investigation, not just the commands. |
+| [**COMMANDS.md**](./COMMANDS.md) | Comprehensive Linux command reference — 70+ commands grouped by operational domain | Looking up syntax, flags, or example output |
+| [**FILESYSTEM.md**](./FILESYSTEM.md) | Linux filesystem from a SOC analyst's perspective | Understanding *where* evidence lives and *what* to monitor |
+| [**DAILY-COMMANDS.md**](./DAILY-COMMANDS.md) | The 80/20 daily-driver subset, organized by investigation workflow | Learning the *flow* of an investigation |
+
+### Cross-Platform & Tooling
+| Document | Purpose | Use When |
+|---|---|---|
+| [**WINDOWS-COMMANDS.md**](./WINDOWS-COMMANDS.md) | PowerShell + cmd companion for Windows investigations | Investigating Windows hosts; prepping for Windows-focused SOC interviews |
+| [**SPLUNK-QUERIES.md**](./SPLUNK-QUERIES.md) | Splunk SPL queries for entry-level SOC work | Working in Splunk; analyzing logs from any platform |
+
+### Framework & Documentation
+| Document | Purpose | Use When |
+|---|---|---|
+| [**MITRE-MAPPING.md**](./MITRE-MAPPING.md) | Linux indicators mapped to MITRE ATT&CK techniques with detection commands | Writing reports; understanding *why* a behavior matters |
+| [**INCIDENT-REPORT.md**](./INCIDENT-REPORT.md) | Incident report template + worked example | Documenting investigations; building portfolio artifacts |
 
 ---
 
 ## 🎯 Who This Is For
 
-- **Entry-level SOC analysts** building Linux investigation skills
+- **Complete beginners** entering cybersecurity from any background
 - **Career-changers** preparing for Tier 1 SOC interviews
-- **Students** working through SOC labs (TryHackMe, BTL1, LetsDefend, CyberDefenders)
+- **Students** working through SOC labs (TryHackMe, BTL1, LetsDefend, CyberDefenders, BOTS)
 - **Self-learners** who want to know what blue-team analysts actually run during a shift
 
 This isn't a Linux tutorial. It's the working command set used during real SOC investigations, distilled into a portable reference.
@@ -28,23 +40,33 @@ This isn't a Linux tutorial. It's the working command set used during real SOC i
 
 ## 🗺️ Recommended Reading Order
 
-1. **Start here:** [DAILY-COMMANDS.md](./DAILY-COMMANDS.md) — to see how investigations actually flow in practice.
-2. **Build the mental map:** [FILESYSTEM.md](./FILESYSTEM.md) — to understand where evidence lives on Linux.
-3. **Use as lookup:** [COMMANDS.md](./COMMANDS.md) — to find any command's syntax, flags, or SOC relevance.
+### For Total Beginners
+1. **[DAILY-COMMANDS.md](./DAILY-COMMANDS.md)** — see how a real investigation flows
+2. **[FILESYSTEM.md](./FILESYSTEM.md)** — build the mental map of where things live
+3. **[COMMANDS.md](./COMMANDS.md)** — use as deep-dive lookup as you encounter new commands
+4. **[MITRE-MAPPING.md](./MITRE-MAPPING.md)** — connect what you see to attacker techniques
+5. **[WINDOWS-COMMANDS.md](./WINDOWS-COMMANDS.md)** — extend to the other major platform
+6. **[SPLUNK-QUERIES.md](./SPLUNK-QUERIES.md)** — bring it all together in a SIEM
+7. **[INCIDENT-REPORT.md](./INCIDENT-REPORT.md)** — document everything you've learned
+
+### For Interview Prep
+1. **[DAILY-COMMANDS.md](./DAILY-COMMANDS.md)** — the workflow story you'll tell
+2. **[MITRE-MAPPING.md](./MITRE-MAPPING.md)** — the framework vocabulary
+3. **[INCIDENT-REPORT.md](./INCIDENT-REPORT.md)** — the artifact you'll point to
 
 ---
 
 ## 🧪 Practice Lab Setup
 
-This reference is designed to be practiced in a home lab. My setup:
+This reference is designed to be practiced in a home lab. The companion setup:
 
 | Role | System | Purpose |
 |---|---|---|
-| Host | macOS (any modern Mac) | Hypervisor host + Splunk Free for SIEM analysis |
-| Hypervisor | UTM (free, Apple Silicon native) | Manages three VMs below |
-| Target | Ubuntu Server 22.04 LTS | The system you investigate |
+| Host | macOS | Hypervisor host + Splunk Free for SIEM analysis |
+| Hypervisor | UTM (free, Apple Silicon native) | Manages the VMs below |
+| Target | Ubuntu Server 22.04 LTS | The Linux system you investigate |
 | Attacker | Kali Linux | Generates the attacks you detect |
-| Endpoint | Windows 11 | Additional target for cross-platform practice |
+| Endpoint | Windows 11 | Cross-platform investigation target |
 
 **Free SIEM options:** Splunk Free, Wazuh, Security Onion.
 
@@ -55,7 +77,7 @@ This reference is designed to be practiced in a home lab. My setup:
 A repeatable 20–30 minute morning routine that builds SOC instincts through repetition:
 
 1. **Orient** — `whoami`, `id`, `hostname`, `date`, `uptime`
-2. **Authentication review** — `last -a`, `sudo lastb`, `auth.log` greps
+2. **Authentication review** — `last -a`, `sudo lastb`, auth.log triage
 3. **Process inspection** — `ps auxf`, `top`, `lsof`
 4. **Network state** — `ss -tulnp`, `ss -tnp state established`
 5. **Log triage** — `journalctl`, `tail`, `grep`
@@ -77,18 +99,22 @@ That recognition only develops through repetition. Run the commands daily. Read 
 
 ## 🗂️ MITRE ATT&CK Coverage
 
-This reference cross-references the following MITRE ATT&CK techniques where relevant:
+This reference cross-references key MITRE ATT&CK techniques throughout:
 
-- **T1003.008** — OS Credential Dumping: /etc/passwd & /etc/shadow
-- **T1037** — Boot or Logon Initialization Scripts
-- **T1053** — Scheduled Task/Job (cron, systemd timers)
-- **T1070** — Indicator Removal (log clearing, history clearing)
-- **T1098.004** — Account Manipulation: SSH Authorized Keys
-- **T1105** — Ingress Tool Transfer (/tmp staging)
-- **T1136** — Create Account
-- **T1543.002** — Create or Modify System Process: Systemd Service
-- **T1554** — Compromise Host Software Binary
-- **T1565.001** — Stored Data Manipulation
+- **Initial Access:** T1078, T1190
+- **Execution:** T1059.004, T1059.006
+- **Persistence:** T1053.003, T1098.004, T1136, T1543.002, T1546.004
+- **Privilege Escalation:** T1548.001, T1068
+- **Defense Evasion:** T1027, T1070, T1564.001
+- **Credential Access:** T1003.008, T1110, T1552.004
+- **Discovery:** T1018, T1057, T1083, T1087
+- **Lateral Movement:** T1021.004
+- **Collection:** T1005
+- **Command and Control:** T1071.001, T1090
+- **Exfiltration:** T1041, T1048
+- **Impact:** T1486, T1490, T1496
+
+Full mapping with detection commands → [MITRE-MAPPING.md](./MITRE-MAPPING.md)
 
 ---
 
@@ -103,14 +129,15 @@ This is a living document. If you spot an error, have a sharper one-liner, or wa
 **James Williams** — SOC Tier 1 Analyst (entry-level), building public learning artifacts as part of the path into blue-team work.
 
 **Certifications & training:**
-- ISC2 Certified in Cybersecurity (CC)
-- Healthcare IT Support Specialization (Johns Hopkins)
-- Tata Cybersecurity Analyst Job Simulation (Forage)
-- TryHackMe Pre Security
+- ISC2 Certified in Cybersecurity (CC) — Candidate status
+- Healthcare IT Support Specialization (Johns Hopkins, Nov 2025)
+- Health Care IT: Challenges and Opportunities (Icahn School of Medicine at Mount Sinai, Nov 2025)
+- Tata Cybersecurity Analyst Job Simulation (Forage, Nov 2025)
+- TryHackMe Pre Security Certificate
 
 **Connect:**
 - 🐦 X / Twitter: [@WilliamCyberSec](https://x.com/WilliamCyberSec)
-- 💻 GitHub: [@willcyber756](https://github.com/willcyber756)
+- 💻 GitHub: [@WiLL75G](https://github.com/WiLL75G)
 
 ---
 
