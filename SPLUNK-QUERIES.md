@@ -426,9 +426,13 @@ This is the Splunk side of your morning ritual. Run alongside the Linux command 
 
 ## 📚 Where To Learn More
 
-- **Splunk Search Reference:** https://docs.splunk.com/Documentation/Splunk/latest/SearchReference
-- **Splunk Boss of the SOC (BOTS):** Free CTF-style SOC labs with realistic Splunk data
-- **Free Splunk Fundamentals 1:** Splunk's official free training
+[![Splunk Search Reference](https://img.shields.io/badge/Splunk-Search%20Reference-000000?style=for-the-badge&logo=splunk&logoColor=white)](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference)
+[![Splunk Boss of the SOC](https://img.shields.io/badge/Splunk-Boss%20of%20the%20SOC-000000?style=for-the-badge&logo=splunk&logoColor=white)](https://github.com/splunk/botsv3)
+[![Splunk Fundamentals 1](https://img.shields.io/badge/Splunk-Fundamentals%201-000000?style=for-the-badge&logo=splunk&logoColor=white)](https://www.splunk.com/en_us/training/free-courses/overview.html)
+
+- **Splunk Search Reference** — official SPL command documentation
+- **Splunk Boss of the SOC (BOTS)** — free CTF-style SOC labs with realistic Splunk data
+- **Splunk Fundamentals 1** — Splunk's official free training course
 
 ---
 
