@@ -65,7 +65,7 @@ sudo grep "Failed password" /var/log/auth.log \
 
 ---
 
-## Phase 3 — WHAT'S RUNNING? (process inspection)
+## Phase 3 WHAT'S RUNNING? (process inspection)
 
 | Command | What It Does |
 |---|---|
@@ -85,7 +85,7 @@ ps aux | grep -E "/tmp/|/dev/shm/|/var/tmp/" | grep -v grep
 
 ---
 
-## Phase 4 — WHAT'S CONNECTED? (network state)
+## Phase 4 WHAT'S CONNECTED? (network state)
 
 | Command | What It Does |
 |---|---|
