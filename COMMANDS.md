@@ -1,16 +1,13 @@
-# SOC Tier 1 Analyst — Linux Command Reference
+# SOC Tier 1 Analyst Linux Command Reference
 
 > A domain-grouped command reference for entry-level SOC Tier 1 Analyst work on Linux systems. Built and maintained as part of my ongoing SOC training journey.
-
-**Author:** James Williams  
-**Handle:** [@WilliamCyberSec](https://x.com/WilliamCyberSec)  
-**GitHub:** [willcyber756](https://github.com/willcyber756)  
+>  
 
 ---
 
 ## About This Reference
 
-This isn't a generic Linux tutorial. It's the working command set used during daily SOC morning ritual exercises in my home lab — every command here has been selected because a SOC Tier 1 Analyst genuinely runs it during real shifts. Commands are grouped by **operational domain** (system, network, processes, logs, etc.) so the mental model matches how analysts actually think during investigations.
+This isn't a generic Linux tutorial. It's the working command set used during daily SOC morning ritual exercises in my home lab every command here has been selected because a SOC Tier 1 Analyst genuinely runs it during real shifts. Commands are grouped by **operational domain** (system, network, processes, logs, etc.) so the mental model matches how analysts actually think during investigations.
 
 Each entry follows the same pattern:
 
@@ -26,7 +23,7 @@ MITRE ATT&CK technique IDs are cited where relevant.
 ## How To Use This
 
 1. **Don't memorize all of it at once.** Pick 5–7 commands per week. Type them daily in your lab until the output is recognizable without thinking.
-2. **Read every output line by line.** The skill isn't typing the command — it's recognizing when output looks *off*.
+2. **Read every output line by line.** The skill isn't typing the command it's recognizing when output looks *off*.
 3. **Practice in a controlled lab.** Mine runs on macOS host with UTM managing Ubuntu Server (target), Kali Linux (attacker), and Windows 11 (target). Splunk lives on the macOS host for log analysis.
 4. **Journal findings daily.** Pattern recognition is built one observation at a time.
 
@@ -60,7 +57,7 @@ The first commands you run after SSH'ing into any system. Establishes *where you
 |---|---|
 | `pwd` | Print current working directory. Confirms where commands will land. |
 | `whoami` | Effective username. Confirms whose privileges are active. |
-| `id` | UID, GID, and group memberships. Reveals if you're in `sudo`, `adm`, `docker` — attackers target these groups. |
+| `id` | UID, GID, and group memberships. Reveals if you're in `sudo`, `adm`, `docker` attackers target these groups. |
 | `hostname` | System name. Confirms which box you're on. |
 | `uname -a` | Kernel version, architecture, OS. Needed for CVE lookups. |
 | `date` | Current system time. Every log timestamp depends on accurate clock. |
@@ -75,7 +72,7 @@ The first commands you run after SSH'ing into any system. Establishes *where you
 
 ## 2. Users & Authentication
 
-Who can log in, who is logged in, and who has tried. **New accounts are the #1 sign of compromise** (MITRE T1136 — Create Account).
+Who can log in, who is logged in, and who has tried. **New accounts are the #1 sign of compromise** (MITRE T1136 Create Account).
 
 | Command | Purpose |
 |---|---|
@@ -200,7 +197,7 @@ Attack surface and active connections. **Unknown listening ports are how backdoo
 | `sudo iptables -L -n -v` | Active firewall rules (legacy). |
 | `sudo ufw status verbose` | UFW firewall status (modern Ubuntu). |
 
-**`ss` flag breakdown** — memorize these:
+**`ss` flag breakdown** memorize these:
 - `-t` TCP
 - `-u` UDP
 - `-l` listening sockets only
@@ -215,7 +212,7 @@ Attack surface and active connections. **Unknown listening ports are how backdoo
 
 Where investigations live. On modern Ubuntu, `journalctl` is now the primary tool — `/var/log/*` files still exist but `journalctl` is more powerful.
 
-### journalctl — Modern systemd log query
+### journalctl Modern systemd log query
 
 | Command | Purpose |
 |---|---|
@@ -254,7 +251,7 @@ Where investigations live. On modern Ubuntu, `journalctl` is now the primary too
 
 ## 8. Persistence & Scheduled Tasks
 
-How attackers maintain access after reboot. **MITRE T1053 — Scheduled Task/Job** is the #1 Linux persistence technique.
+How attackers maintain access after reboot. **MITRE T1053 Scheduled Task/Job** is the #1 Linux persistence technique.
 
 | Command | Purpose |
 |---|---|
@@ -263,7 +260,7 @@ How attackers maintain access after reboot. **MITRE T1053 — Scheduled Task/Job
 | `ls -la /etc/cron.hourly /etc/cron.daily /etc/cron.weekly /etc/cron.monthly` | System-wide scheduled scripts. |
 | `cat /etc/crontab` | The master system crontab. |
 | `ls -la /var/spool/cron/crontabs/` | All user crontabs (root-readable). |
-| `systemctl list-timers --all` | Systemd timers — modern cron alternative. Often overlooked. |
+| `systemctl list-timers --all` | Systemd timers modern cron alternative. Often overlooked. |
 | `at -l` | Pending one-time scheduled jobs. |
 
 **SOC mindset:** *"What is set to run later that I didn't authorize?"*
@@ -279,7 +276,7 @@ What's running now and what's configured to run at boot.
 | `systemctl status <service>` | Is this service running? What was its last output? |
 | `systemctl list-units --type=service --state=running` | All currently running services. |
 | `systemctl list-unit-files --state=enabled` | What starts at boot (persistence). |
-| `systemctl list-units --failed` | Failed services — often a tampering or exploitation signal. |
+| `systemctl list-units --failed` | Failed services often a tampering or exploitation signal. |
 | `systemctl start <service>` | Start a service. |
 | `systemctl stop <service>` | Stop a service. |
 | `systemctl restart <service>` | Restart a service. |
@@ -318,11 +315,11 @@ Reading and changing the access rights on files and directories.
 | `chgrp group file` | Change group only. |
 | `find / -perm -4000 -type f 2>/dev/null` | All SUID binaries. Top privilege-escalation vector. |
 | `find / -perm -2000 -type f 2>/dev/null` | All SGID binaries. |
-| `find / -perm -o+w -type f 2>/dev/null` | World-writable files — attacker payload landing zones. |
+| `find / -perm -o+w -type f 2>/dev/null` | World-writable files attacker payload landing zones. |
 
 **Reading `rwxr-xr-x` left to right:** owner perms, group perms, others perms.
 
-**SOC mindset:** *"Who can read, write, or execute this — and should they?"*
+**SOC mindset:** *"Who can read, write, or execute this and should they?"*
 
 ---
 
@@ -369,7 +366,7 @@ The connective tissue of Linux analysis. The entire art of log triage is built o
 
 | Operator | Effect |
 |---|---|
-| `\|` | Pipe — feed one command's output into the next. |
+| `\|` | Pipe feed one command's output into the next. |
 | `>` | Redirect output to a file (overwrites). |
 | `>>` | Redirect output to a file (appends). |
 | `2>` | Redirect error output to a file. |
@@ -452,13 +449,13 @@ find /tmp -type f -executable -exec sha256sum {} \;
 
 These tools exist beyond the entry-level scope but are worth knowing about as you progress:
 
-- **`tcpdump`** — packet capture
-- **`tshark`** — terminal Wireshark; packet analysis
-- **`nmap`** — network scanning
-- **`auditd`** — Linux audit framework
-- **`osquery`** — SQL-style system queries (Facebook open source)
-- **`Sysmon` (via Sysinternals)** — Windows equivalent for endpoint visibility
-- **`Wazuh` / `OSSEC`** — open-source HIDS that automate much of the above
+- **`tcpdump`** packet capture
+- **`tshark`** terminal Wireshark; packet analysis
+- **`nmap`** network scanning
+- **`auditd`** Linux audit framework
+- **`osquery`** SQL-style system queries (Facebook open source)
+- **`Sysmon` (via Sysinternals)** Windows equivalent for endpoint visibility
+- **`Wazuh` / `OSSEC`** open-source HIDS that automate much of the above
 
 ---
 
@@ -472,13 +469,13 @@ This reference pairs with my morning SOC ritual. The workflow:
 4. Journal findings in plain analyst-voice English in `~/soc-journal/YYYY-MM-DD.md`.
 5. Once per week, simulate an anomaly (add a fake user, open a fake port, drop a file in /tmp) and check whether the ritual catches it.
 
-The skill isn't typing the command — it's recognizing when output looks *off*. That recognition only develops through repetition.
+The skill isn't typing the command it's recognizing when output looks *off*. That recognition only develops through repetition.
 
 ---
 
 ## License
 
-MIT — feel free to fork, adapt, and use this for your own SOC training journey.
+MIT feel free to fork, adapt, and use this for your own SOC training journey.
 
 ---
 
