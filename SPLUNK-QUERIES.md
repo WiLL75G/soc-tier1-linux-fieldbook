@@ -1,15 +1,14 @@
-# 🔎 Splunk SPL Queries for SOC Tier 1 Analysts
+# Splunk SPL Queries for SOC Tier 1 Analysts
 
 > The Splunk Search Processing Language (SPL) queries an entry-level SOC analyst actually runs during a shift. Built around the home-lab setup: Splunk Free on macOS host, ingesting logs from Ubuntu Server, Kali, and Windows 11 VMs.
 
-**Author:** James Williams ([@WilliamCyberSec](https://x.com/WilliamCyberSec))  
 **Companion to:** [COMMANDS.md](./COMMANDS.md), [FILESYSTEM.md](./FILESYSTEM.md), [DAILY-COMMANDS.md](./DAILY-COMMANDS.md)
 
 ---
 
-## 📖 What Is SPL?
+## What Is SPL?
 
-**Search Processing Language** is Splunk's query language. Every Splunk search is a pipeline — you start broad, filter, then transform the data into useful output. The basic shape:
+**Search Processing Language** is Splunk's query language. Every Splunk search is a pipeline you start broad, filter, then transform the data into useful output. The basic shape:
 
 ```spl
 <search terms> | <filter> | <transform> | <visualize>
@@ -28,7 +27,7 @@ This reads as: *"In the Linux index, find lines containing 'Failed password', co
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
 1. [SPL Anatomy: The 5 Building Blocks](#1-spl-anatomy-the-5-building-blocks)
 2. [Search Fundamentals](#2-search-fundamentals)
@@ -414,9 +413,9 @@ This is the Splunk side of your morning ritual. Run alongside the Linux command 
 
 ---
 
-## 🎓 Pro Tips for Beginners
+## Pro Tips for Beginners
 
-1. **Always set a time range.** Splunk searches "All time" by default — this is slow and noisy. Use `earliest=-24h` or set the time picker.
+1. **Always set a time range.** Splunk searches "All time" by default this is slow and noisy. Use `earliest=-24h` or set the time picker.
 2. **Pipe builds work left-to-right.** Each `|` is a new transformation. Read SPL like a recipe.
 3. **`stats` is more powerful than `chart`** for tabular output. Use `chart` only for visualizations.
 4. **Save your favorites as Reports** in Splunk so you can re-run them in one click.
@@ -424,18 +423,18 @@ This is the Splunk side of your morning ritual. Run alongside the Linux command 
 
 ---
 
-## 📚 Where To Learn More
+## Where To Learn More
 
 [![Splunk Search Reference](https://img.shields.io/badge/Splunk-Search%20Reference-000000?style=for-the-badge&logo=splunk&logoColor=white)](https://docs.splunk.com/Documentation/Splunk/latest/SearchReference)
 [![Splunk Boss of the SOC](https://img.shields.io/badge/Splunk-Boss%20of%20the%20SOC-000000?style=for-the-badge&logo=splunk&logoColor=white)](https://github.com/splunk/botsv3)
 [![Splunk Fundamentals 1](https://img.shields.io/badge/Splunk-Fundamentals%201-000000?style=for-the-badge&logo=splunk&logoColor=white)](https://www.splunk.com/en_us/training/free-courses/overview.html)
 
-- **Splunk Search Reference** — official SPL command documentation
-- **Splunk Boss of the SOC (BOTS)** — free CTF-style SOC labs with realistic Splunk data
-- **Splunk Fundamentals 1** — Splunk's official free training course
+- **Splunk Search Reference** official SPL command documentation
+- **Splunk Boss of the SOC (BOTS)** free CTF-style SOC labs with realistic Splunk data
+- **Splunk Fundamentals 1** Splunk's official free training course
 
 ---
 
-## 📄 License
+## License
 
-[MIT](./LICENSE) — fork, adapt, use freely.
+[MIT](./LICENSE) fork, adapt, use freely.
