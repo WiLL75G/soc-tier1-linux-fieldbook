@@ -2,6 +2,17 @@
 
 > A complete beginner-to-intermediate working reference for SOC Tier 1 Analysts. Linux commands, filesystem paths, daily workflows, Splunk queries, Windows commands, MITRE ATT&CK mapping, and incident report templates — everything you'd reach for in a real shift.
 
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Windows](https://img.shields.io/badge/Windows-0078D4?style=for-the-badge&logo=windows&logoColor=white)
+![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white)
+![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white)
+![Splunk](https://img.shields.io/badge/Splunk-000000?style=for-the-badge&logo=splunk&logoColor=white)
+![MITRE ATT&CK](https://img.shields.io/badge/MITRE-ATT%26CK-C7102E?style=for-the-badge&logo=target&logoColor=white)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
+[![Made with Markdown](https://img.shields.io/badge/Made_with-Markdown-1f425f.svg?style=flat-square&logo=markdown)](https://www.markdownguide.org/)
+[![Built In Public](https://img.shields.io/badge/Built_In-Public-success?style=flat-square)](https://x.com/WilliamCyberSec)
+
 ---
 
 ## 📚 What's Inside
@@ -134,10 +145,6 @@ This is a living document. If you spot an error, have a sharper one-liner, or wa
 - Health Care IT: Challenges and Opportunities (Icahn School of Medicine at Mount Sinai, Nov 2025)
 - Tata Cybersecurity Analyst Job Simulation (Forage, Nov 2025)
 - TryHackMe Pre Security Certificate
-
-**Connect:**
-- 🐦 X / Twitter: [@WilliamCyberSec](https://x.com/WilliamCyberSec)
-- 💻 GitHub: [@WiLL75G](https://github.com/WiLL75G)
 
 ---
 
