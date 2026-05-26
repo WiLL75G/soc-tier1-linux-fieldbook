@@ -1,21 +1,20 @@
-# 📝 SOC Incident Report Template + Worked Example
+# SOC Incident Report Template + Worked Example
 
 > The structure SOC Tier 1 analysts use to document investigations. Includes a complete worked example based on a real home-lab scenario (SSH brute force detection).
 
-**Author:** James Williams ([@WilliamCyberSec](https://x.com/WilliamCyberSec))  
 **Companion to:** [COMMANDS.md](./COMMANDS.md), [MITRE-MAPPING.md](./MITRE-MAPPING.md)
 
 ---
 
-## 📖 Why Incident Reports Matter
+## Why Incident Reports Matter
 
-A SOC analyst's job isn't done when they spot the threat. It's done when they *document* it in a way that any reader — another analyst, a manager, an auditor, an executive — can understand what happened, what was done about it, and what's next. The incident report is the **deliverable**.
+A SOC analyst's job isn't done when they spot the threat. It's done when they *document* it in a way that any reader another analyst, a manager, an auditor, an executive can understand what happened, what was done about it, and what's next. The incident report is the **deliverable**.
 
 In an interview, "Tell me about a time you investigated an incident" is the most-asked question. A polished report is the artifact you point to. This template gives you the structure to write one that sounds professional from day one.
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
 1. [The Template Structure](#1-the-template-structure)
 2. [Section-by-Section Guidance](#2-section-by-section-guidance)
@@ -55,7 +54,7 @@ Every incident report in this fieldbook follows this exact structure. Stick to i
 
 ### 1. Title
 
-Format: `Day [N]: [Short Descriptive Title] — SOC Tier 1 Investigation`
+Format: `Day [N]: [Short Descriptive Title] SOC Tier 1 Investigation`
 
 Example: `Day 05: SSH Brute Force Detection on Ubuntu Server — SOC Tier 1 Investigation`
 
@@ -243,7 +242,7 @@ An automated password-guessing attack was detected against the lab server. The a
   sudo grep "Failed password" /var/log/auth.log | wc -l
   ```
 - Output: `487`
-- *SOC Observations:* 487 failed authentications in the current log — abnormal for a lab system that should have near-zero login activity.
+- *SOC Observations:* 487 failed authentications in the current log abnormal for a lab system that should have near-zero login activity.
 
 **Step 4 — Identified top source IPs**
 - Command:
@@ -296,7 +295,7 @@ An automated password-guessing attack was detected against the lab server. The a
 
 - Automated brute-force attack confirmed against SSH service.
 - Single source IP (192.168.64.20) responsible for 100% of failure events.
-- Attack targeted common default usernames — no evidence of targeted reconnaissance.
+- Attack targeted common default usernames no evidence of targeted reconnaissance.
 - No successful authentication followed the attack window.
 - No secondary indicators of compromise (no new accounts, no new processes from /tmp, no modified `authorized_keys`).
 
@@ -310,7 +309,7 @@ An automated password-guessing attack was detected against the lab server. The a
 
 #### Analyst Insight
 
-This investigation reinforced the value of high-signal one-liners for log triage. A four-command pipeline (`grep | awk | sort | uniq -c | sort -rn | head`) reduced 487 events into a single actionable insight — one source IP, four targeted usernames — in under 60 seconds. The exercise also highlighted that Tier 1 work is rarely about complex tooling; it's about pattern recognition built through repetition.
+This investigation reinforced the value of high-signal one-liners for log triage. A four-command pipeline (`grep | awk | sort | uniq -c | sort -rn | head`) reduced 487 events into a single actionable insight one source IP, four targeted usernames in under 60 seconds. The exercise also highlighted that Tier 1 work is rarely about complex tooling; it's about pattern recognition built through repetition.
 
 #### Learning Outcome
 
@@ -351,7 +350,7 @@ This investigation simulated and detected a successful brute-force attack patter
 2. **Lead with the punchline.** The Incident Summary should answer *"what happened?"* in one read. Save the methodology for the methodology section.
 3. **Show, don't tell.** Always include the actual command and the actual output. *"I checked the logs"* is weak. *"`sudo grep \"Failed password\" /var/log/auth.log | wc -l` returned 487"* is strong.
 4. **Use MITRE IDs in every report.** Even if the technique feels obvious. The IDs are the analyst's vocabulary.
-5. **Keep the Analyst Insight personal but professional.** This is the only section where you reflect — make it count without sounding casual.
+5. **Keep the Analyst Insight personal but professional.** This is the only section where you reflect make it count without sounding casual.
 6. **Don't speculate.** If the data doesn't support a conclusion, leave it out or mark it as *"hypothesis, pending further evidence."*
 7. **Always end with "what's next."** A good report points forward to the next investigation, the next hardening step, or the next skill to build.
 
@@ -363,7 +362,7 @@ For every home-lab investigation you complete:
 
 1. Copy this template structure into a new folder (e.g., `day-NN-topic/README.md`).
 2. Fill out each section as you investigate.
-3. Capture screenshots as you go — never rely on remembering later.
+3. Capture screenshots as you go never rely on remembering later.
 4. Commit to your portfolio repo when complete.
 5. Reference the report in your résumé under Projects.
 
@@ -373,4 +372,4 @@ After ten of these, your GitHub will tell a story no résumé bullet point ever 
 
 ## 📄 License
 
-[MIT](./LICENSE) — fork, adapt, use freely.
+[MIT](./LICENSE) fork, adapt, use freely.
