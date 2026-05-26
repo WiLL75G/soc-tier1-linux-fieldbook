@@ -549,9 +549,13 @@ That single sentence — with the technique ID — instantly communicates analys
 
 ## 📚 Where To Learn More
 
-- **MITRE ATT&CK Linux Matrix:** https://attack.mitre.org/matrices/enterprise/linux/
-- **MITRE ATT&CK Navigator:** https://mitre-attack.github.io/attack-navigator/ — free tool for mapping coverage
-- **Atomic Red Team:** open-source library that lets you simulate ATT&CK techniques in your lab safely
+[![MITRE ATT&CK Linux Matrix](https://img.shields.io/badge/MITRE-Linux%20Matrix-C7102E?style=for-the-badge&logo=target&logoColor=white)](https://attack.mitre.org/matrices/enterprise/linux/)
+[![MITRE ATT&CK Navigator](https://img.shields.io/badge/MITRE-ATT%26CK%20Navigator-C7102E?style=for-the-badge&logo=target&logoColor=white)](https://mitre-attack.github.io/attack-navigator/)
+[![Atomic Red Team](https://img.shields.io/badge/Red%20Canary-Atomic%20Red%20Team-FF0000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/redcanaryco/atomic-red-team)
+
+- **MITRE ATT&CK Linux Matrix** — official catalog of Linux adversary techniques
+- **MITRE ATT&CK Navigator** — free interactive tool for mapping detection coverage
+- **Atomic Red Team** — open-source library for safely simulating ATT&CK techniques in your home lab
 
 ---
 
