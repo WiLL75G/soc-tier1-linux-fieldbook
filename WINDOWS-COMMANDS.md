@@ -179,7 +179,7 @@ The crown jewels of Windows forensics. Three primary logs:
 | **System** | OS events, services, drivers |
 | **Application** | Application errors and events |
 
-### PowerShell — `Get-WinEvent` (modern)
+### PowerShell `Get-WinEvent` (modern)
 
 | Command | Purpose |
 |---|---|
@@ -190,14 +190,14 @@ The crown jewels of Windows forensics. Three primary logs:
 | `Get-WinEvent -ListLog *` | Every available log channel. |
 | `Get-WinEvent -LogName Security -FilterHashtable @{ID=4625; StartTime=(Get-Date).AddHours(-24)}` | Failed logons in last 24h. |
 
-### Command Prompt — `wevtutil` (legacy)
+### Command Prompt `wevtutil` (legacy)
 
 | Command | Purpose |
 |---|---|
 | `wevtutil qe Security /c:50 /f:text` | Last 50 Security events as text. |
 | `wevtutil qe Security /q:"*[System[(EventID=4625)]]" /c:20 /f:text` | Last 20 failed logons. |
 
-**Killer one-liner — top source IPs of failed logons:**
+**Killer one-liner top source IPs of failed logons:**
 
 ```powershell
 Get-WinEvent -LogName Security -FilterHashtable @{ID=4625} -MaxEvents 1000 |
