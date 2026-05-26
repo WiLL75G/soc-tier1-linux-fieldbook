@@ -310,7 +310,7 @@ The skill isn't typing the commands. The skill is recognizing when output looks 
 
 ## License
 
-MIT — fork, adapt, use freely for your own SOC training journey.
+MIT fork, adapt, use freely for your own SOC training journey.
 
 ---
 
