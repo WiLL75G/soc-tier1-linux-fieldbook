@@ -400,9 +400,13 @@ Parallel to the Linux ritual — run on your Windows 11 VM.
 
 ## 📚 Where To Learn More
 
-- **LOLBAS** (Living Off the Land Binaries and Scripts): https://lolbas-project.github.io — every legitimate Windows binary attackers abuse
-- **Sysinternals Suite**: free toolkit from Microsoft (Process Monitor, Process Explorer, Autoruns)
-- **Microsoft Event Log reference**: https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/
+[![LOLBAS Project](https://img.shields.io/badge/LOLBAS-Project-2D2D2D?style=for-the-badge&logo=github&logoColor=white)](https://lolbas-project.github.io)
+[![Sysinternals Suite](https://img.shields.io/badge/Microsoft-Sysinternals-0078D4?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/en-us/sysinternals/)
+[![Microsoft Event Logs](https://img.shields.io/badge/Microsoft-Event%20Log%20Reference-0078D4?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/)
+
+- **LOLBAS** (Living Off the Land Binaries and Scripts) — every legitimate Windows binary attackers abuse
+- **Sysinternals Suite** — free toolkit from Microsoft (Process Monitor, Process Explorer, Autoruns)
+- **Microsoft Event Log Reference** — official documentation for Windows Security Event IDs
 
 ---
 
