@@ -1,21 +1,20 @@
-# 🎯 MITRE ATT&CK Mapping for Linux SOC Analysts
+# MITRE ATT&CK Mapping for Linux SOC Analysts
 
 > A practical mapping of Linux indicators to MITRE ATT&CK techniques. For every technique a Tier 1 analyst encounters: what it is, what to look for, and which commands to run.
-
-**Author:** James Williams ([@WilliamCyberSec](https://x.com/WilliamCyberSec))  
+ 
 **Companion to:** [COMMANDS.md](./COMMANDS.md), [FILESYSTEM.md](./FILESYSTEM.md), [DAILY-COMMANDS.md](./DAILY-COMMANDS.md)
 
 ---
 
-## 📖 What Is MITRE ATT&CK?
+## What Is MITRE ATT&CK?
 
 **MITRE ATT&CK** is a free, globally-used knowledge base of attacker behaviors. It catalogs *how* real attackers operate, organized into:
 
-- **Tactics** — the *why* (the attacker's goal at a stage)
-- **Techniques** — the *how* (the specific method used)
-- **Sub-techniques** — granular variants of techniques
+- **Tactics** the *why* (the attacker's goal at a stage)
+- **Techniques** the *how* (the specific method used)
+- **Sub-techniques** granular variants of techniques
 
-Every technique gets an ID like **T1059** (Command and Scripting Interpreter) or **T1053.003** (Scheduled Task/Job: Cron). When you read a SOC analyst's incident report, those IDs aren't decoration — they're the universal language of the field. Learn to think in technique IDs and your reports, conversations, and interviews instantly sound professional.
+Every technique gets an ID like **T1059** (Command and Scripting Interpreter) or **T1053.003** (Scheduled Task/Job: Cron). When you read a SOC analyst's incident report, those IDs aren't decoration they're the universal language of the field. Learn to think in technique IDs and your reports, conversations, and interviews instantly sound professional.
 
 **The 14 ATT&CK tactics, in attack order:**
 
@@ -38,7 +37,7 @@ This document focuses on tactics 3–14 (post-compromise) since that's where Tie
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
 1. [Initial Access](#1-initial-access)
 2. [Execution](#2-execution)
@@ -60,7 +59,7 @@ This document focuses on tactics 3–14 (post-compromise) since that's where Tie
 
 How the attacker gets in.
 
-### T1078 — Valid Accounts
+### T1078 Valid Accounts
 
 **What:** Attacker uses legitimate credentials (stolen, leaked, or default).
 
@@ -77,7 +76,7 @@ sudo grep "Accepted" /var/log/auth.log | awk '{print $11}' | sort | uniq -c
 
 ---
 
-### T1190 — Exploit Public-Facing Application
+### T1190 Exploit Public-Facing Application
 
 **What:** Attacker exploits a vulnerability in an internet-facing service (web app, SSH, etc.).
 
@@ -98,9 +97,9 @@ journalctl -u apache2 --since "1 hour ago"
 
 How the attacker runs code.
 
-### T1059 — Command and Scripting Interpreter
+### T1059 Command and Scripting Interpreter
 
-#### T1059.004 — Unix Shell
+#### T1059.004 Unix Shell
 
 **What:** Attacker uses bash, sh, or zsh to execute commands.
 
@@ -113,7 +112,7 @@ cat /root/.bash_history
 ps auxf | grep -E "sh -c|bash -c"
 ```
 
-#### T1059.006 — Python
+#### T1059.006 Python
 
 **What:** Attacker runs Python scripts (common for reverse shells).
 
@@ -131,7 +130,7 @@ journalctl --since "1 hour ago" | grep -i python
 
 How the attacker survives a reboot. **The most important tactic for Tier 1 to master.**
 
-### T1053.003 — Scheduled Task/Job: Cron
+### T1053.003 Scheduled Task/Job: Cron
 
 **Where to look:**
 ```bash
@@ -147,7 +146,7 @@ sudo ls -la /var/spool/cron/crontabs/
 
 ---
 
-### T1098.004 — Account Manipulation: SSH Authorized Keys
+### T1098.004 Account Manipulation: SSH Authorized Keys
 
 **What:** Attacker adds their public key to a user's `authorized_keys` file for passwordless persistent access.
 
@@ -161,9 +160,9 @@ sudo find / -name "authorized_keys" -exec ls -la {} \; -exec cat {} \; 2>/dev/nu
 
 ---
 
-### T1136 — Create Account
+### T1136 Create Account
 
-#### T1136.001 — Local Account
+#### T1136.001 Local Account
 
 **What:** Attacker creates a new user account.
 
@@ -178,7 +177,7 @@ sudo grep "new user" /var/log/auth.log
 
 ---
 
-### T1543.002 — Create or Modify System Process: Systemd Service
+### T1543.002 Create or Modify System Process: Systemd Service
 
 **What:** Attacker creates a systemd service or modifies an existing one to run their code.
 
@@ -194,7 +193,7 @@ systemctl list-units --type=service --state=running
 
 ---
 
-### T1546.004 — Event Triggered Execution: Unix Shell Configuration Modification
+### T1546.004 Event Triggered Execution: Unix Shell Configuration Modification
 
 **What:** Attacker modifies shell startup files (`.bashrc`, `.profile`, `/etc/profile`) to execute code at login.
 
@@ -213,7 +212,7 @@ ls -la /etc/profile.d/
 
 How the attacker becomes root.
 
-### T1548.001 — Abuse Elevation Control Mechanism: SUID/SGID
+### T1548.001 Abuse Elevation Control Mechanism: SUID/SGID
 
 **What:** Attacker exploits SUID binaries (files that run as their owner regardless of who executes them).
 
@@ -227,7 +226,7 @@ sudo find / -perm -2000 -type f 2>/dev/null
 
 ---
 
-### T1068 — Exploitation for Privilege Escalation
+### T1068 Exploitation for Privilege Escalation
 
 **What:** Attacker exploits a kernel or service vulnerability to escalate.
 
@@ -246,9 +245,9 @@ dmesg | tail -50
 
 How the attacker hides.
 
-### T1070 — Indicator Removal
+### T1070 Indicator Removal
 
-#### T1070.002 — Clear Linux Logs
+#### T1070.002 Clear Linux Logs
 
 **Where to look:**
 ```bash
@@ -258,7 +257,7 @@ sudo wc -l /var/log/auth.log /var/log/syslog
 
 **Red flag:** log files that are much smaller than yesterday, or completely empty, or have very recent mtimes for old entries.
 
-#### T1070.003 — Clear Command History
+#### T1070.003 Clear Command History
 
 **Where to look:**
 ```bash
@@ -268,7 +267,7 @@ ls -la ~/.bash_history
 
 **Red flag:** empty `.bash_history` on a long-active user, or a `.bash_history` symlinked to `/dev/null`.
 
-#### T1070.006 — Timestomp
+#### T1070.006 Timestomp
 
 **What:** Attacker modifies file timestamps to evade time-based detection.
 
@@ -281,7 +280,7 @@ stat /suspicious/file
 
 ---
 
-### T1027 — Obfuscated Files or Information
+### T1027 Obfuscated Files or Information
 
 **What:** Attacker base64-encodes, packs, or obfuscates payloads.
 
@@ -295,7 +294,7 @@ file /suspicious/binary
 
 ---
 
-### T1564.001 — Hide Artifacts: Hidden Files and Directories
+### T1564.001 Hide Artifacts: Hidden Files and Directories
 
 **Where to look:**
 ```bash
@@ -312,7 +311,7 @@ find /tmp -name ".*" -type f 2>/dev/null
 
 How the attacker steals credentials.
 
-### T1003.008 — OS Credential Dumping: /etc/passwd and /etc/shadow
+### T1003.008 OS Credential Dumping: /etc/passwd and /etc/shadow
 
 **Where to look:**
 ```bash
@@ -324,9 +323,9 @@ sudo stat /etc/shadow                       # check last access time
 
 ---
 
-### T1110 — Brute Force
+### T1110 Brute Force
 
-#### T1110.001 — Password Guessing
+#### T1110.001 Password Guessing
 
 ```bash
 sudo grep "Failed password" /var/log/auth.log | awk '{print $11}' | sort | uniq -c | sort -rn | head -10
@@ -337,7 +336,7 @@ sudo lastb -n 50
 
 ---
 
-### T1552.004 — Unsecured Credentials: Private Keys
+### T1552.004 Unsecured Credentials: Private Keys
 
 **Where to look:**
 ```bash
@@ -352,7 +351,7 @@ sudo find / -name "id_rsa" -o -name "id_ed25519" -o -name "*.pem" 2>/dev/null
 
 How the attacker learns the environment.
 
-### T1083 — File and Directory Discovery
+### T1083 File and Directory Discovery
 
 **Bash history will show:**
 ```
@@ -361,7 +360,7 @@ find / -name "*.conf" 2>/dev/null
 ls -la /home
 ```
 
-### T1087 — Account Discovery
+### T1087 Account Discovery
 
 **Bash history will show:**
 ```
@@ -371,7 +370,7 @@ id
 groups
 ```
 
-### T1057 — Process Discovery
+### T1057 Process Discovery
 
 **Bash history will show:**
 ```
@@ -380,7 +379,7 @@ ps -ef
 top
 ```
 
-### T1018 — Remote System Discovery
+### T1018 Remote System Discovery
 
 **Bash history will show:**
 ```
@@ -389,7 +388,7 @@ ip route
 cat /etc/hosts
 ```
 
-**Where to look:** `~/.bash_history` is your best friend after a compromise — you can see what the attacker explored.
+**Where to look:** `~/.bash_history` is your best friend after a compromise you can see what the attacker explored.
 
 ---
 
@@ -397,7 +396,7 @@ cat /etc/hosts
 
 How the attacker spreads.
 
-### T1021.004 — Remote Services: SSH
+### T1021.004 Remote Services: SSH
 
 **Where to look:**
 ```bash
@@ -416,7 +415,7 @@ sudo ss -tnp | grep ":22"
 
 How the attacker gathers data before exfiltration.
 
-### T1005 — Data from Local System
+### T1005 Data from Local System
 
 **Bash history will show:**
 ```
@@ -436,7 +435,7 @@ find /tmp -size +10M 2>/dev/null
 
 How the attacker communicates with the compromised host.
 
-### T1071.001 — Application Layer Protocol: Web Protocols
+### T1071.001 Application Layer Protocol: Web Protocols
 
 **Where to look:**
 ```bash
@@ -448,7 +447,7 @@ sudo ss -tnp state established | grep -E ":80 |:443 "
 
 ---
 
-### T1090 — Proxy
+### T1090 Proxy
 
 **Where to look:**
 ```bash
@@ -461,7 +460,7 @@ ps aux | grep -E "proxychains|tor|ssh.*-L|ssh.*-R"
 
 How the attacker steals the data.
 
-### T1048 — Exfiltration Over Alternative Protocol
+### T1048 Exfiltration Over Alternative Protocol
 
 **Where to look:**
 ```bash
@@ -473,7 +472,7 @@ sudo iptables -L -n -v                        # firewall traffic counters
 
 ---
 
-### T1041 — Exfiltration Over C2 Channel
+### T1041 Exfiltration Over C2 Channel
 
 **Where to look:** same connection as the C2 channel above. The attacker uses one tunnel for both control and exfil.
 
@@ -483,14 +482,14 @@ sudo iptables -L -n -v                        # firewall traffic counters
 
 The damage phase.
 
-### T1486 — Data Encrypted for Impact (Ransomware)
+### T1486 Data Encrypted for Impact (Ransomware)
 
 **Where to look:**
 ```bash
 find / -name "*.encrypted" -o -name "*.locked" -o -name "*README*RANSOM*" 2>/dev/null
 ```
 
-### T1490 — Inhibit System Recovery
+### T1490 Inhibit System Recovery
 
 **Where to look:**
 ```bash
@@ -498,7 +497,7 @@ systemctl status backup.service             # are backups running?
 ls -la /etc/cron.*/                          # have backup jobs been removed?
 ```
 
-### T1496 — Resource Hijacking (Cryptomining)
+### T1496 Resource Hijacking (Cryptomining)
 
 **Where to look:**
 ```bash
@@ -537,28 +536,28 @@ A consolidated quick-reference table. **Print this. Tape it to your monitor.**
 
 ---
 
-## 🎓 How To Use This in Real Investigations
+## How To Use This in Real Investigations
 
 When you write an incident report, every finding should reference its MITRE ID. Example:
 
-> *"At 14:23 UTC, host `webserver-01` showed 487 failed SSH login attempts from 185.220.x.x targeting accounts `root` and `admin` (**MITRE T1110.001 — Password Guessing**). No successful logins followed. Recommendation: block source IP at perimeter."*
+> *"At 14:23 UTC, host `webserver-01` showed 487 failed SSH login attempts from 185.220.x.x targeting accounts `root` and `admin` (**MITRE T1110.001 Password Guessing**). No successful logins followed. Recommendation: block source IP at perimeter."*
 
-That single sentence — with the technique ID — instantly communicates analyst maturity to anyone reading the ticket.
+That single sentence with the technique ID instantly communicates analyst maturity to anyone reading the ticket.
 
 ---
 
-## 📚 Where To Learn More
+## Where To Learn More
 
 [![MITRE ATT&CK Linux Matrix](https://img.shields.io/badge/MITRE-Linux%20Matrix-C7102E?style=for-the-badge&logo=target&logoColor=white)](https://attack.mitre.org/matrices/enterprise/linux/)
 [![MITRE ATT&CK Navigator](https://img.shields.io/badge/MITRE-ATT%26CK%20Navigator-C7102E?style=for-the-badge&logo=target&logoColor=white)](https://mitre-attack.github.io/attack-navigator/)
 [![Atomic Red Team](https://img.shields.io/badge/Red%20Canary-Atomic%20Red%20Team-FF0000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/redcanaryco/atomic-red-team)
 
-- **MITRE ATT&CK Linux Matrix** — official catalog of Linux adversary techniques
-- **MITRE ATT&CK Navigator** — free interactive tool for mapping detection coverage
-- **Atomic Red Team** — open-source library for safely simulating ATT&CK techniques in your home lab
+- **MITRE ATT&CK Linux Matrix** official catalog of Linux adversary techniques
+- **MITRE ATT&CK Navigator** free interactive tool for mapping detection coverage
+- **Atomic Red Team** open-source library for safely simulating ATT&CK techniques in your home lab
 
 ---
 
-## 📄 License
+## License
 
-[MIT](./LICENSE) — fork, adapt, use freely.
+[MIT](./LICENSE) fork, adapt, use freely.
