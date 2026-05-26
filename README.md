@@ -1,6 +1,6 @@
 # 🛡️ SOC Tier 1 Linux Fieldbook
 
-> A complete beginner-to-intermediate working reference for SOC Tier 1 Analysts. Linux commands, filesystem paths, daily workflows, Splunk queries, Windows commands, MITRE ATT&CK mapping, and incident report templates — everything you'd reach for in a real shift.
+> A complete beginner-to-intermediate working reference for SOC Tier 1 Analysts. Linux commands, filesystem paths, daily workflows, Splunk queries, Windows commands, MITRE ATT&CK mapping, and incident report templates everything you'd reach for in a real shift.
 
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![Windows](https://img.shields.io/badge/Windows-0078D4?style=for-the-badge&logo=windows&logoColor=white)
@@ -52,18 +52,18 @@ This isn't a Linux tutorial. It's the working command set used during real SOC i
 ## 🗺️ Recommended Reading Order
 
 ### For Total Beginners
-1. **[DAILY-COMMANDS.md](./DAILY-COMMANDS.md)** — see how a real investigation flows
-2. **[FILESYSTEM.md](./FILESYSTEM.md)** — build the mental map of where things live
-3. **[COMMANDS.md](./COMMANDS.md)** — use as deep-dive lookup as you encounter new commands
-4. **[MITRE-MAPPING.md](./MITRE-MAPPING.md)** — connect what you see to attacker techniques
-5. **[WINDOWS-COMMANDS.md](./WINDOWS-COMMANDS.md)** — extend to the other major platform
-6. **[SPLUNK-QUERIES.md](./SPLUNK-QUERIES.md)** — bring it all together in a SIEM
-7. **[INCIDENT-REPORT.md](./INCIDENT-REPORT.md)** — document everything you've learned
+1. **[DAILY-COMMANDS.md](./DAILY-COMMANDS.md)** see how a real investigation flows
+2. **[FILESYSTEM.md](./FILESYSTEM.md)** build the mental map of where things live
+3. **[COMMANDS.md](./COMMANDS.md)** use as deep-dive lookup as you encounter new commands
+4. **[MITRE-MAPPING.md](./MITRE-MAPPING.md)** connect what you see to attacker techniques
+5. **[WINDOWS-COMMANDS.md](./WINDOWS-COMMANDS.md)** extend to the other major platform
+6. **[SPLUNK-QUERIES.md](./SPLUNK-QUERIES.md)** bring it all together in a SIEM
+7. **[INCIDENT-REPORT.md](./INCIDENT-REPORT.md)** document everything you've learned
 
 ### For Interview Prep
-1. **[DAILY-COMMANDS.md](./DAILY-COMMANDS.md)** — the workflow story you'll tell
-2. **[MITRE-MAPPING.md](./MITRE-MAPPING.md)** — the framework vocabulary
-3. **[INCIDENT-REPORT.md](./INCIDENT-REPORT.md)** — the artifact you'll point to
+1. **[DAILY-COMMANDS.md](./DAILY-COMMANDS.md)** the workflow story you'll tell
+2. **[MITRE-MAPPING.md](./MITRE-MAPPING.md)** the framework vocabulary
+3. **[INCIDENT-REPORT.md](./INCIDENT-REPORT.md)** the artifact you'll point to
 
 ---
 
@@ -87,14 +87,14 @@ This reference is designed to be practiced in a home lab. The companion setup:
 
 A repeatable 20–30 minute morning routine that builds SOC instincts through repetition:
 
-1. **Orient** — `whoami`, `id`, `hostname`, `date`, `uptime`
-2. **Authentication review** — `last -a`, `sudo lastb`, auth.log triage
-3. **Process inspection** — `ps auxf`, `top`, `lsof`
-4. **Network state** — `ss -tulnp`, `ss -tnp state established`
-5. **Log triage** — `journalctl`, `tail`, `grep`
-6. **File system check** — `find`, `stat`, `file`
-7. **Persistence audit** — `crontab -l`, `systemctl list-timers`
-8. **Document** — journal findings in plain analyst voice
+1. **Orient** `whoami`, `id`, `hostname`, `date`, `uptime`
+2. **Authentication review** `last -a`, `sudo lastb`, auth.log triage
+3. **Process inspection** `ps auxf`, `top`, `lsof`
+4. **Network state** `ss -tulnp`, `ss -tnp state established`
+5. **Log triage** `journalctl`, `tail`, `grep`
+6. **File system check** `find`, `stat`, `file`
+7. **Persistence audit** `crontab -l`, `systemctl list-timers`
+8. **Document** journal findings in plain analyst voice
 
 Full workflow with commands → [DAILY-COMMANDS.md](./DAILY-COMMANDS.md)
 
@@ -102,7 +102,7 @@ Full workflow with commands → [DAILY-COMMANDS.md](./DAILY-COMMANDS.md)
 
 ## 🧠 The Skill This Builds
 
-The reference is the easy part. The skill is **pattern recognition** — knowing what "normal" looks like on your system, so that "abnormal" jumps off the screen during a real alert.
+The reference is the easy part. The skill is **pattern recognition** knowing what "normal" looks like on your system, so that "abnormal" jumps off the screen during a real alert.
 
 That recognition only develops through repetition. Run the commands daily. Read every line of output. Journal your observations. The eyes train themselves.
 
@@ -137,20 +137,14 @@ This is a living document. If you spot an error, have a sharper one-liner, or wa
 
 ## 👤 About The Author
 
-**James Williams** — SOC Tier 1 Analyst (entry-level), building public learning artifacts as part of the path into blue-team work.
+**William** SOC Tier 1 Analyst (entry-level), building public learning artifacts as part of the path into blue-team work.
 
-**Certifications & training:**
-- ISC2 Certified in Cybersecurity (CC) — Candidate status
-- Healthcare IT Support Specialization (Johns Hopkins, Nov 2025)
-- Health Care IT: Challenges and Opportunities (Icahn School of Medicine at Mount Sinai, Nov 2025)
-- Tata Cybersecurity Analyst Job Simulation (Forage, Nov 2025)
-- TryHackMe Pre Security Certificate
 
 ---
 
 ## 📄 License
 
-[MIT](./LICENSE) — fork, adapt, use freely for your own SOC training journey.
+[MIT](./LICENSE) fork, adapt, use freely for your own SOC training journey.
 
 ---
 
