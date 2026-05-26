@@ -133,12 +133,6 @@ Full mapping with detection commands → [MITRE-MAPPING.md](./MITRE-MAPPING.md)
 
 This is a living document. If you spot an error, have a sharper one-liner, or want to suggest an additional section, please open an issue or submit a PR.
 
----
-
-## About The Author
-
-**William** SOC Tier 1 Analyst (entry-level), building public learning artifacts as part of the path into blue-team work.
-
 
 ---
 
