@@ -1,13 +1,12 @@
-# 🪟 Windows Commands for SOC Tier 1 Analysts
+# Windows Commands for SOC Tier 1 Analysts
 
-> The PowerShell and Command Prompt commands an entry-level SOC analyst runs during Windows investigations. Companion to the Linux Fieldbook — together they cover the two platforms every SOC role tests on.
-
-**Author:** James Williams ([@WilliamCyberSec](https://x.com/WilliamCyberSec))  
+> The PowerShell and Command Prompt commands an entry-level SOC analyst runs during Windows investigations. Companion to the Linux Fieldbook together they cover the two platforms every SOC role tests on.
+ 
 **Companion to:** [COMMANDS.md](./COMMANDS.md), [FILESYSTEM.md](./FILESYSTEM.md)
 
 ---
 
-## 📖 PowerShell vs Command Prompt — Which to Learn?
+## PowerShell vs Command Prompt Which to Learn?
 
 Both. But here's the modern reality:
 
@@ -24,7 +23,7 @@ To open PowerShell: press `Win + X`, then click **"Terminal (Admin)"** or **"Win
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
 1. [System Orientation](#1-system-orientation)
 2. [Users & Authentication](#2-users--authentication)
@@ -157,7 +156,7 @@ Who has access, who is logged in, who has tried.
 | `arp -a` | ARP cache. |
 | `nslookup <domain>` | DNS lookup. |
 
-**Killer one-liner — connections to suspicious ports:**
+**Killer one-liner connections to suspicious ports:**
 
 ```powershell
 Get-NetTCPConnection -State Established | Where-Object {$_.RemotePort -in 4444,8888,31337,6667}
@@ -369,7 +368,7 @@ Memorize these. They appear in every Windows-focused SOC interview.
 
 ## 9. The Tier 1 Windows Daily Ritual
 
-Parallel to the Linux ritual — run on your Windows 11 VM.
+Parallel to the Linux ritual run on your Windows 11 VM.
 
 | Step | Command | Looking For |
 |---|---|---|
@@ -388,28 +387,28 @@ Parallel to the Linux ritual — run on your Windows 11 VM.
 
 ---
 
-## 🎓 Pro Tips for Beginners
+## Pro Tips for Beginners
 
-1. **Always run PowerShell as Administrator** when investigating — many commands return incomplete data without it.
+1. **Always run PowerShell as Administrator** when investigating many commands return incomplete data without it.
 2. **Use Sysmon** for better visibility. It's free, from Microsoft, and gives you Event ID 1 (richer than 4688) plus network and file events.
-3. **Learn the pipe.** PowerShell pipes pass objects, not text — much more powerful than cmd. `Get-Process | Where-Object {...} | Select-Object ...` is the standard pattern.
+3. **Learn the pipe.** PowerShell pipes pass objects, not text much more powerful than cmd. `Get-Process | Where-Object {...} | Select-Object ...` is the standard pattern.
 4. **`Get-Help <cmdlet> -Full`** is the equivalent of `man` for PowerShell.
 5. **Sysmon + Splunk** is the gold-standard small SOC setup. Install both on your Windows 11 VM and forward to Splunk on macOS.
 
 ---
 
-## 📚 Where To Learn More
+## Where To Learn More
 
 [![LOLBAS Project](https://img.shields.io/badge/LOLBAS-Project-2D2D2D?style=for-the-badge&logo=github&logoColor=white)](https://lolbas-project.github.io)
 [![Sysinternals Suite](https://img.shields.io/badge/Microsoft-Sysinternals-0078D4?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/en-us/sysinternals/)
 [![Microsoft Event Logs](https://img.shields.io/badge/Microsoft-Event%20Log%20Reference-0078D4?style=for-the-badge&logo=microsoft&logoColor=white)](https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/)
 
-- **LOLBAS** (Living Off the Land Binaries and Scripts) — every legitimate Windows binary attackers abuse
-- **Sysinternals Suite** — free toolkit from Microsoft (Process Monitor, Process Explorer, Autoruns)
-- **Microsoft Event Log Reference** — official documentation for Windows Security Event IDs
+- **LOLBAS** (Living Off the Land Binaries and Scripts) every legitimate Windows binary attackers abuse
+- **Sysinternals Suite** free toolkit from Microsoft (Process Monitor, Process Explorer, Autoruns)
+- **Microsoft Event Log Reference** official documentation for Windows Security Event IDs
 
 ---
 
 ## 📄 License
 
-[MIT](./LICENSE) — fork, adapt, use freely.
+[MIT](./LICENSE) fork, adapt, use freely.
