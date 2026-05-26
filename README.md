@@ -1,4 +1,4 @@
-# 🛡️ SOC Tier 1 Linux Fieldbook
+# SOC Tier 1 Linux Fieldbook
 
 > A complete beginner-to-intermediate working reference for SOC Tier 1 Analysts. Linux commands, filesystem paths, daily workflows, Splunk queries, Windows commands, MITRE ATT&CK mapping, and incident report templates everything you'd reach for in a real shift.
 
@@ -15,12 +15,12 @@
 
 ---
 
-## 📚 What's Inside
+## What's Inside
 
 ### Core Linux References
 | Document | Purpose | Use When |
 |---|---|---|
-| [**COMMANDS.md**](./COMMANDS.md) | Comprehensive Linux command reference — 70+ commands grouped by operational domain | Looking up syntax, flags, or example output |
+| [**COMMANDS.md**](./COMMANDS.md) | Comprehensive Linux command reference 70+ commands grouped by operational domain | Looking up syntax, flags, or example output |
 | [**FILESYSTEM.md**](./FILESYSTEM.md) | Linux filesystem from a SOC analyst's perspective | Understanding *where* evidence lives and *what* to monitor |
 | [**DAILY-COMMANDS.md**](./DAILY-COMMANDS.md) | The 80/20 daily-driver subset, organized by investigation workflow | Learning the *flow* of an investigation |
 
@@ -38,7 +38,7 @@
 
 ---
 
-## 🎯 Who This Is For
+## Who This Is For
 
 - **Complete beginners** entering cybersecurity from any background
 - **Career-changers** preparing for Tier 1 SOC interviews
@@ -49,7 +49,7 @@ This isn't a Linux tutorial. It's the working command set used during real SOC i
 
 ---
 
-## 🗺️ Recommended Reading Order
+## Recommended Reading Order
 
 ### For Total Beginners
 1. **[DAILY-COMMANDS.md](./DAILY-COMMANDS.md)** see how a real investigation flows
@@ -67,7 +67,7 @@ This isn't a Linux tutorial. It's the working command set used during real SOC i
 
 ---
 
-## 🧪 Practice Lab Setup
+## Practice Lab Setup
 
 This reference is designed to be practiced in a home lab. The companion setup:
 
@@ -83,7 +83,7 @@ This reference is designed to be practiced in a home lab. The companion setup:
 
 ---
 
-## 🥋 The Daily Practice Ritual
+## The Daily Practice Ritual
 
 A repeatable 20–30 minute morning routine that builds SOC instincts through repetition:
 
@@ -100,7 +100,7 @@ Full workflow with commands → [DAILY-COMMANDS.md](./DAILY-COMMANDS.md)
 
 ---
 
-## 🧠 The Skill This Builds
+## The Skill This Builds
 
 The reference is the easy part. The skill is **pattern recognition** knowing what "normal" looks like on your system, so that "abnormal" jumps off the screen during a real alert.
 
@@ -108,7 +108,7 @@ That recognition only develops through repetition. Run the commands daily. Read 
 
 ---
 
-## 🗂️ MITRE ATT&CK Coverage
+## MITRE ATT&CK Coverage
 
 This reference cross-references key MITRE ATT&CK techniques throughout:
 
@@ -129,20 +129,20 @@ Full mapping with detection commands → [MITRE-MAPPING.md](./MITRE-MAPPING.md)
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 This is a living document. If you spot an error, have a sharper one-liner, or want to suggest an additional section, please open an issue or submit a PR.
 
 ---
 
-## 👤 About The Author
+## About The Author
 
 **William** SOC Tier 1 Analyst (entry-level), building public learning artifacts as part of the path into blue-team work.
 
 
 ---
 
-## 📄 License
+## License
 
 [MIT](./LICENSE) fork, adapt, use freely for your own SOC training journey.
 
