@@ -1,17 +1,14 @@
-# SOC Tier 1 — Daily Investigation Commands
+# SOC Tier 1 Daily Investigation Commands
 
 > The 80/20 command set. The commands an analyst actually grabs during shift, organized by investigation phase. If you only learn 25 commands, these are the ones.
-
-**Author:** James Williams  
-**Handle:** [@WilliamCyberSec](https://x.com/WilliamCyberSec)  
-**GitHub:** [willcyber756](https://github.com/willcyber756)  
+ 
 **Companion to:** SOC Tier 1 Linux Command Reference + Filesystem Reference
 
 ---
 
 ## Why This Subset Exists
 
-The full command reference covers 70+ commands. That's necessary breadth, but it's **not** what a working analyst uses on a Tuesday afternoon during an alert investigation. This document is the working subset — the commands an analyst reaches for without thinking, multiple times per shift.
+The full command reference covers 70+ commands. That's necessary breadth, but it's **not** what a working analyst uses on a Tuesday afternoon during an alert investigation. This document is the working subset the commands an analyst reaches for without thinking, multiple times per shift.
 
 Master these and you can handle the majority of Tier 1 investigations.
 
@@ -29,7 +26,7 @@ Each phase has 3–5 go-to commands. Learn the commands in the order an analyst 
 
 ---
 
-## Phase 1 — ORIENT (where am I, who am I?)
+## Phase 1 ORIENT (where am I, who am I?)
 
 You just SSH'd into a system or pulled it up from an alert. First 15 seconds:
 
@@ -38,14 +35,14 @@ You just SSH'd into a system or pulled it up from an alert. First 15 seconds:
 | `whoami` | Confirms your effective username. |
 | `id` | Your UID, GID, and groups (are you in sudo/adm/docker?). |
 | `hostname` | Confirms which system you're on. |
-| `date` | Verifies system clock — every timestamp depends on this. |
+| `date` | Verifies system clock every timestamp depends on this. |
 | `uptime` | How long since last reboot. Unexpected reboot? Investigate. |
 
 **Why these:** every investigation needs these answers before you do anything else. Wrong clock = wrong timeline = wrong conclusions.
 
 ---
 
-## Phase 2 — WHO has been here? (authentication review)
+## Phase 2 WHO has been here? (authentication review)
 
 The single highest-signal phase of any Linux investigation.
 
@@ -79,7 +76,7 @@ sudo grep "Failed password" /var/log/auth.log \
 | `lsof -p <pid>` | All files a specific process has open. |
 | `ls -la /proc/<pid>/exe` | Real path to a process's executable. |
 
-**Killer one-liner — processes from suspicious directories:**
+**Killer one-liner processes from suspicious directories:**
 ```bash
 ps aux | grep -E "/tmp/|/dev/shm/|/var/tmp/" | grep -v grep
 ```
@@ -105,7 +102,7 @@ ps aux | grep -E "/tmp/|/dev/shm/|/var/tmp/" | grep -v grep
 
 ---
 
-## Phase 5 — WHAT HAPPENED? (log triage — the biggest phase)
+## Phase 5 WHAT HAPPENED? (log triage the biggest phase)
 
 This is where Tier 1 analysts spend the most time. Logs tell the story; you just have to read them.
 
@@ -142,7 +139,7 @@ This is where Tier 1 analysts spend the most time. Logs tell the story; you just
 | `-B 3` | 3 lines before match (Context-Before) |
 | `-r` | Recursive search through directories |
 
-**Killer one-liner — top targeted usernames in failed logins:**
+**Killer one-liner top targeted usernames in failed logins:**
 ```bash
 sudo grep "Failed password" /var/log/auth.log \
   | awk '{print $9}' | sort | uniq -c | sort -rn | head -10
@@ -150,7 +147,7 @@ sudo grep "Failed password" /var/log/auth.log \
 
 ---
 
-## Phase 6 — WHAT CHANGED? (file system check)
+## Phase 6 WHAT CHANGED? (file system check)
 
 | Command | What It Does |
 |---|---|
@@ -166,7 +163,7 @@ sudo grep "Failed password" /var/log/auth.log \
 
 ---
 
-## Phase 7 — WILL IT COME BACK? (persistence check)
+## Phase 7 WILL IT COME BACK? (persistence check)
 
 After finding something suspicious, always ask: *"How would this attacker survive a reboot?"*
 
@@ -181,14 +178,14 @@ After finding something suspicious, always ask: *"How would this attacker surviv
 | `find / -name "authorized_keys" 2>/dev/null` | All SSH key files. |
 | `getent passwd \| tail` | Recently added user accounts. |
 
-**Killer one-liner — every authorized_keys file plus its contents:**
+**Killer one-liner every authorized_keys file plus its contents:**
 ```bash
 sudo find / -name "authorized_keys" -exec ls -la {} \; -exec cat {} \; 2>/dev/null
 ```
 
 ---
 
-## Phase 8 — DOCUMENT (close the loop)
+## Phase 8 DOCUMENT (close the loop)
 
 Every investigation ends with notes. Real Tier 1 analysts write tickets, comments, and journal entries constantly.
 
@@ -199,13 +196,13 @@ nano ~/soc-journal/$(date +%Y-%m-%d).md
 
 Write in plain analyst voice. Example entry:
 
-> *Investigation 14:32 — Alert on host webserver-01: SSH brute force from 185.220.x.x. Reviewed `/var/log/auth.log`: 487 failed attempts targeting `root` and `admin` between 14:00–14:25. No successful follow-up confirmed via `last -a`. Source IP geolocates to Tor exit node. Recommendation: block at perimeter firewall, no host-level action needed. Escalating to Tier 2 for IP block ticket.*
+> *Investigation 14:32 Alert on host webserver-01: SSH brute force from 185.220.x.x. Reviewed `/var/log/auth.log`: 487 failed attempts targeting `root` and `admin` between 14:00–14:25. No successful follow-up confirmed via `last -a`. Source IP geolocates to Tor exit node. Recommendation: block at perimeter firewall, no host-level action needed. Escalating to Tier 2 for IP block ticket.*
 
 That's exactly the writing style hiring managers want to see in portfolios.
 
 ---
 
-## The 80/20 List — Master These 25 First
+## The 80/20 List Master These 25 First
 
 If you learn nothing else, master these. They cover the majority of daily SOC work.
 
