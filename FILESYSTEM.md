@@ -1,17 +1,14 @@
 # Linux Filesystem Reference for SOC Tier 1 Analysts
 
 > A walkthrough of the Linux filesystem hierarchy from a SOC analyst's perspective. Where evidence lives, where attackers hide, and what to watch.
-
-**Author:** James Williams  
-**Handle:** [@WilliamCyberSec](https://x.com/WilliamCyberSec)  
-**GitHub:** [willcyber756](https://github.com/willcyber756)  
+  
 **Companion to:** SOC Tier 1 Linux Command Reference
 
 ---
 
 ## Why This Matters
 
-Commands are only useful if you understand the paths they operate on. `cat /var/log/auth.log` means nothing if you don't know what `/var/log/` is, why authentication events live there, or what would look suspicious. The Linux filesystem follows the **Filesystem Hierarchy Standard (FHS)** — a stable layout shared across nearly all Linux distros. Learn it once and every Linux system you ever touch makes sense.
+Commands are only useful if you understand the paths they operate on. `cat /var/log/auth.log` means nothing if you don't know what `/var/log/` is, why authentication events live there, or what would look suspicious. The Linux filesystem follows the **Filesystem Hierarchy Standard (FHS)** a stable layout shared across nearly all Linux distros. Learn it once and every Linux system you ever touch makes sense.
 
 This guide is built around what a SOC Tier 1 analyst actually cares about: **where evidence lives, where attackers like to hide, and which paths to baseline and monitor**.
 
@@ -63,7 +60,7 @@ This guide is built around what a SOC Tier 1 analyst actually cares about: **whe
 
 ---
 
-## 2. `/etc` — System Configuration
+## 2. `/etc` System Configuration
 
 The brain of the system. Nearly every configuration file lives here. If you understand `/etc`, you understand the system.
 
@@ -76,7 +73,7 @@ The brain of the system. Nearly every configuration file lives here. If you unde
 | `/etc/group` | Group definitions and memberships. |
 | `/etc/sudoers` | Who can run sudo and what they can run. Use `visudo` to edit. |
 | `/etc/sudoers.d/` | Drop-in sudo rules (often missed during audits). |
-| `/etc/ssh/sshd_config` | SSH daemon configuration — the primary attack vector's settings. |
+| `/etc/ssh/sshd_config` | SSH daemon configuration the primary attack vector's settings. |
 | `/etc/ssh/ssh_config` | SSH client configuration. |
 | `/etc/hostname` | The system's hostname. |
 | `/etc/hosts` | Local hostname-to-IP mappings (overrides DNS). |
@@ -85,7 +82,7 @@ The brain of the system. Nearly every configuration file lives here. If you unde
 | `/etc/cron.{hourly,daily,weekly,monthly}/` | System-wide scheduled scripts. |
 | `/etc/cron.d/` | Drop-in cron jobs. |
 | `/etc/systemd/system/` | Systemd unit files (services and timers). |
-| `/etc/profile`, `/etc/bash.bashrc` | Shell startup files — all users. |
+| `/etc/profile`, `/etc/bash.bashrc` | Shell startup files all users. |
 | `/etc/fstab` | Filesystem mount table. |
 | `/etc/apt/sources.list` | APT package repositories. |
 | `/etc/apt/sources.list.d/` | Drop-in repository configs (third-party). |
@@ -107,7 +104,7 @@ The brain of the system. Nearly every configuration file lives here. If you unde
 
 ---
 
-## 3. `/var` — Logs & Variable Data
+## 3. `/var` Logs & Variable Data
 
 The most operationally important directory for a SOC analyst. Logs, mail queues, spools, and other data that grows over time.
 
@@ -149,7 +146,7 @@ The most operationally important directory for a SOC analyst. Logs, mail queues,
 
 ---
 
-## 4. `/home` — User Data
+## 4. `/home` User Data
 
 Every regular user gets a directory here, typically `/home/<username>`.
 
@@ -160,7 +157,7 @@ Every regular user gets a directory here, typically `/home/<username>`.
 | `~/.bash_history` | Shell command history. |
 | `~/.bashrc`, `~/.profile`, `~/.bash_profile` | Shell startup scripts (persistence target). |
 | `~/.ssh/` | SSH keys and config (huge persistence target). |
-| `~/.ssh/authorized_keys` | Public keys allowed to log in as this user — **T1098.004**. |
+| `~/.ssh/authorized_keys` | Public keys allowed to log in as this user **T1098.004**. |
 | `~/.ssh/known_hosts` | Hosts this user has connected to. |
 | `~/.ssh/config` | Per-user SSH client config. |
 | `~/.config/`, `~/.local/` | Application configs and data. |
@@ -183,7 +180,7 @@ Every regular user gets a directory here, typically `/home/<username>`.
 
 ---
 
-## 5. `/root` — Root User's Home
+## 5. `/root` Root User's Home
 
 Same as `/home/<user>` but for the root user. Access requires sudo or root.
 
@@ -194,7 +191,7 @@ Same red flags apply, but **doubly important** because root compromise means tot
 
 ---
 
-## 6. `/tmp`, `/var/tmp`, `/dev/shm` — Temporary Directories
+## 6. `/tmp`, `/var/tmp`, `/dev/shm` Temporary Directories
 
 The attacker's playground. All three are **world-writable**, meaning any process or user can drop files there. Differences:
 
@@ -202,17 +199,17 @@ The attacker's playground. All three are **world-writable**, meaning any process
 |---|---|---|
 | `/tmp` | Yes | Disk |
 | `/var/tmp` | No (persists) | Disk |
-| `/dev/shm` | Yes | RAM (tmpfs) — faster, leaves less forensic trace |
+| `/dev/shm` | Yes | RAM (tmpfs) faster, leaves less forensic trace |
 
 ### SOC Relevance
 
 These three directories are the **#1 location for malware staging** on Linux:
-- Dropped payloads (T1105 — Ingress Tool Transfer)
+- Dropped payloads (T1105 Ingress Tool Transfer)
 - Web shell dropping points
 - Cryptominer binaries
 - Persistence scripts before they're moved elsewhere
 
-`/dev/shm` is particularly dangerous because it's in RAM — files there leave fewer disk forensics artifacts.
+`/dev/shm` is particularly dangerous because it's in RAM files there leave fewer disk forensics artifacts.
 
 ### Red Flags
 
@@ -233,7 +230,7 @@ ls -lah /tmp /var/tmp /dev/shm
 
 ## 7. `/proc` — Live Process & Kernel Info
 
-A **virtual filesystem** — files here don't exist on disk. The kernel creates them on the fly. Every running process gets a `/proc/<pid>/` directory.
+A **virtual filesystem** files here don't exist on disk. The kernel creates them on the fly. Every running process gets a `/proc/<pid>/` directory.
 
 ### Key Per-Process Paths
 
@@ -266,17 +263,17 @@ A **virtual filesystem** — files here don't exist on disk. The kernel creates 
 
 ### Red Flags
 
-- A process whose `/proc/<pid>/exe` points to `/tmp/`, `/dev/shm/`, or shows `(deleted)` — running malware whose file has been removed.
+- A process whose `/proc/<pid>/exe` points to `/tmp/`, `/dev/shm/`, or shows `(deleted)` running malware whose file has been removed.
 
 ---
 
-## 8. `/sys` — Kernel Objects
+## 8. `/sys` Kernel Objects
 
 Another virtual filesystem, exposing kernel internals (devices, drivers, kernel parameters). You'll touch this rarely as a Tier 1, but know it exists. Used heavily by udev and hardware-aware tools.
 
 ---
 
-## 9. `/usr` — Installed Software
+## 9. `/usr` Installed Software
 
 The bulk of the operating system. Most software, libraries, and documentation lives here.
 
@@ -293,7 +290,7 @@ The bulk of the operating system. Most software, libraries, and documentation li
 ### SOC Relevance
 
 - **`/usr/local/bin/`** is a sysadmin's manual install location — but also where attackers drop custom binaries to blend in.
-- Modified system binaries (e.g., a trojanized `/usr/bin/ls`) are a classic rootkit technique (T1554 — Compromise Host Software Binary).
+- Modified system binaries (e.g., a trojanized `/usr/bin/ls`) are a classic rootkit technique (T1554 Compromise Host Software Binary).
 - Hash baselines of `/usr/bin/` and `/usr/sbin/` catch this.
 
 ### Red Flags
@@ -304,7 +301,7 @@ The bulk of the operating system. Most software, libraries, and documentation li
 
 ---
 
-## 10. `/bin`, `/sbin`, `/lib` — Core Binaries & Libraries
+## 10. `/bin`, `/sbin`, `/lib` Core Binaries & Libraries
 
 On modern Linux (Ubuntu 22.04+, RHEL 9+), these are **symlinks** into `/usr/`:
 - `/bin → /usr/bin`
@@ -315,7 +312,7 @@ They contain the essential binaries needed to boot and rescue the system. Treat 
 
 ---
 
-## 11. `/boot` — Bootloader & Kernel
+## 11. `/boot` Bootloader & Kernel
 
 | Path | Contents |
 |---|---|
@@ -330,9 +327,9 @@ They contain the essential binaries needed to boot and rescue the system. Treat 
 
 ---
 
-## 12. `/dev` — Device Files
+## 12. `/dev` Device Files
 
-In Linux, everything is a file — including hardware. `/dev` contains device files:
+In Linux, everything is a file including hardware. `/dev` contains device files:
 
 | Path | Represents |
 |---|---|
@@ -341,7 +338,7 @@ In Linux, everything is a file — including hardware. `/dev` contains device fi
 | `/dev/null` | The bit bucket (discards anything written to it). |
 | `/dev/zero` | Stream of zeros. |
 | `/dev/random`, `/dev/urandom` | Randomness sources. |
-| `/dev/shm/` | Shared memory (the world-writable one — see Section 6). |
+| `/dev/shm/` | Shared memory (the world-writable one see Section 6). |
 
 ### Red Flags
 
@@ -371,7 +368,7 @@ Cleared at every boot. Rarely a target, but useful for understanding service sta
 
 ### SOC Relevance
 
-- `/opt/<vendor>/` packages are often missed during audits — check them too.
+- `/opt/<vendor>/` packages are often missed during audits check them too.
 - `/media/` shows what removable storage has been attached (USB-borne malware vector).
 
 ---
@@ -438,7 +435,7 @@ That question is the entire SOC mindset, condensed.
 
 ## License
 
-MIT — fork, adapt, use freely for your own SOC training journey.
+MIT fork, adapt, use freely for your own SOC training journey.
 
 ---
 
