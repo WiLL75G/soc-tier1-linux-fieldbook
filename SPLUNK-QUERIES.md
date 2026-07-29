@@ -1,6 +1,29 @@
 # Splunk SPL Queries for SOC Tier 1 Analysts
 
-> The Splunk Search Processing Language (SPL) queries an entry-level SOC analyst actually runs during a shift. Built around the home-lab setup: Splunk Free on macOS host, ingesting logs from Ubuntu Server, Kali, and Windows 11 VMs.
+A practical reference to the Splunk Search Processing Language (SPL) used during day-to-day Security Operations Center investigations. Built around a home lab running Splunk Free on macOS, ingesting telemetry from Ubuntu Server, Kali Linux, and Windows 11, with queries focused on authentication, process execution, network activity, persistence, and threat hunting.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![SIEM](https://img.shields.io/badge/SIEM-Splunk-black.svg)]()
+[![Focus](https://img.shields.io/badge/Focus-SOC%20Threat%20Hunting-blue.svg)]()
+[![Language](https://img.shields.io/badge/Language-SPL-success.svg)]()
+[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows-orange.svg)]()
+[![MITRE ATT&CK](https://img.shields.io/badge/MITRE-T1110%20%7C%20T1059%20%7C%20T1053-red.svg)](https://attack.mitre.org/)
+[![Queries](https://img.shields.io/badge/Queries-40%2B-brightgreen.svg)]()
+[![Status](https://img.shields.io/badge/Status-Complete-brightgreen.svg)]()
+
+## At a Glance
+
+| Field | Detail |
+| --- | --- |
+| Repository | Splunk SPL Queries for SOC Tier 1 Analysts |
+| Focus | Log analysis, threat hunting, and SOC investigations |
+| SIEM | Splunk Free |
+| Query Language | Search Processing Language (SPL) |
+| Operating Systems | Ubuntu Linux, Windows 11 |
+| Detection Areas | Authentication, processes, networking, persistence, threat hunting |
+| MITRE ATT&CK | T1110, T1053, T1059, T1078 |
+| Outcome | A practical SPL reference for Tier 1 SOC investigations |
+| Status | Complete |
 
 **Companion to:** [COMMANDS.md](./COMMANDS.md), [FILESYSTEM.md](./FILESYSTEM.md), [DAILY-COMMANDS.md](./DAILY-COMMANDS.md)
 
