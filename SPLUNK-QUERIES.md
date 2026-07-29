@@ -2,14 +2,12 @@
 
 A practical reference to the Splunk Search Processing Language (SPL) used during day-to-day Security Operations Center investigations. Built around a home lab running Splunk Free on macOS, ingesting telemetry from Ubuntu Server, Kali Linux, and Windows 11, with queries focused on authentication, process execution, network activity, persistence, and threat hunting.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![SIEM](https://img.shields.io/badge/SIEM-Splunk-black.svg)]()
 [![Focus](https://img.shields.io/badge/Focus-SOC%20Threat%20Hunting-blue.svg)]()
 [![Language](https://img.shields.io/badge/Language-SPL-success.svg)]()
 [![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows-orange.svg)]()
 [![MITRE ATT&CK](https://img.shields.io/badge/MITRE-T1110%20%7C%20T1059%20%7C%20T1053-red.svg)](https://attack.mitre.org/)
 [![Queries](https://img.shields.io/badge/Queries-40%2B-brightgreen.svg)]()
-[![Status](https://img.shields.io/badge/Status-Complete-brightgreen.svg)]()
 
 ## At a Glance
 
