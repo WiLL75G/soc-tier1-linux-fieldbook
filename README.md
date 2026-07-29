@@ -11,10 +11,6 @@
 [![Reference](https://img.shields.io/badge/Reference-Fieldbook-0052CC.svg)]()
 [![Status](https://img.shields.io/badge/Status-Complete-brightgreen.svg)]()
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](./LICENSE)
-[![Made with Markdown](https://img.shields.io/badge/Made_with-Markdown-1f425f.svg?style=flat-square&logo=markdown)](https://www.markdownguide.org/)
-[![Built In Public](https://img.shields.io/badge/Built_In-Public-success?style=flat-square)](https://x.com/WilliamCyberSec)
-
 ---
 
 ## What's Inside
